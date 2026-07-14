@@ -1,36 +1,60 @@
+import { useEffect, useState } from "react";
+
+// Components
+import Loader from "./components/Loader";
+import CursorGlow from "./components/CursorGlow";
+import Background from "./components/Background";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
 import Skills from "./components/Skills";
-import Projects from "./components/Projects";
 import Education from "./components/Education";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 
 function App() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return <Loader />;
+  }
+
   return (
-    <div className="bg-[#0D1117] text-white min-h-screen overflow-x-hidden">
+    <div className="relative min-h-screen overflow-x-hidden bg-gradient-to-b from-[#050505] via-[#0D1117] to-black text-white">
+
+      {/* Animated Background */}
+      <Background />
+
+      {/* Neon Cursor */}
+      <CursorGlow />
 
       {/* Navigation */}
       <Navbar />
 
-      {/* Hero Section */}
-      <Hero />
+      {/* Main Content */}
+      <main>
 
-      {/* About */}
-      <About />
+        <Hero />
 
-      {/* Skills */}
-      <Skills />
+        <About />
 
-      {/* Projects */}
-      <Projects />
+        <Skills />
 
-      {/* Education */}
-      <Education />
+        <Education />
 
-      {/* Contact */}
-      <Contact />
+        {/* Projects Section will be added later */}
+
+        <Contact />
+
+      </main>
 
       {/* Footer */}
       <Footer />
